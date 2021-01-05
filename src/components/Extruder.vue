@@ -1,21 +1,15 @@
 <template>
     <div>
-        <img src="../assets/conveyor.svg"/>
+        <img src="../assets/extruder.svg"/>
         <p>{{title}}</p>
-
-        <Motor title="Motor"/>
     </div>
 </template>
 
 <script>
-import Motor from './Motor'
 export default {
-    name: 'Conveyor',
+    name: 'Extruder',
     props: {
         title: String
-    },
-    components: {
-        Motor
     }
 }
 </script>

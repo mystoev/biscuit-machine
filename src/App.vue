@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/vue-logo.png">
-    <Conveyor cname="Some conveyor" />
+    <BiscuitMachine />
   </div>
 </template>
 
 <script>
-import Conveyor from './components/Conveyor'
+import BiscuitMachine from './components/BiscuitMachine'
 
 export default {
   name: 'App',
   components: {
-    Conveyor
+    BiscuitMachine
   }
 }
 </script>
