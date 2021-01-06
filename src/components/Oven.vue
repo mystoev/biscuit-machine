@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="../assets/oven.svg"/>
+        <img class="svg-common" src="../assets/oven.svg"/>
         <p>{{title}}</p>
     </div>
 </template>

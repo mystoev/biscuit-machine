@@ -32,5 +32,8 @@ export default {
 </script>
 
 <style>
-
+    .svg-common {
+        width: 100px;
+        height: 100px;
+    }
 </style>

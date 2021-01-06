@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="../assets/extruder.svg"/>
+        <img class="svg-common" src="../assets/extruder.svg"/>
         <p>{{title}}</p>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="../assets/motor.svg"/>
+        <img class="svg-common" src="../assets/motor.svg"/>
         <p>{{title}}</p>
     </div>
 </template>

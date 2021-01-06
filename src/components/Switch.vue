@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="../assets/switch.svg"/>
+        <img class="svg-common" src="../assets/switch.svg"/>
         <p>{{title}}</p>
     </div>
 </template>
