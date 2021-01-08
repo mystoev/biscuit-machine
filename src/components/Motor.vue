@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="svg-common" src="../assets/motor.svg"/>
+        <img class="svg-motor" src="../assets/motor.svg"/>
         <p>{{title}}</p>
     </div>
 </template>
@@ -15,5 +15,9 @@ export default {
 </script>
 
 <style>
-
+    .svg-motor {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+    }
 </style>

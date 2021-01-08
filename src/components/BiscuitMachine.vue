@@ -33,6 +33,7 @@ export default {
 
 <style>
     .svg-common {
+        display: inline-block;
         width: 100px;
         height: 100px;
     }

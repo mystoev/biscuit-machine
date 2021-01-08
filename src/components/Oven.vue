@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="svg-common" src="../assets/oven.svg"/>
+        <img class="svg-oven" src="../assets/oven.svg"/>
         <p>{{title}}</p>
     </div>
 </template>
@@ -15,5 +15,9 @@ export default {
 </script>
 
 <style>
-
+    .svg-oven {
+        display: inline-block;
+        width: 160px;
+        height: 50px;
+    }
 </style>

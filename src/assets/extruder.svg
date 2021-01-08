@@ -1,10 +1,9 @@
 <?xml version="1.1" standalone="no"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  viewBox="0 0 100 100" xml:space="preserve">
 
-  <svg width="50" height="60" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="2 2, 48 2, 32 58, 18 58" stroke="#666" fill="#999" stroke-width="2"/>
-    <polygon points="2 2, 48 2, 38 48, 12 48" stroke="#666" fill="#999" stroke-width="2"/>
-  </svg>
+    <polygon points="2 2, 48 2, 32 58, 18 58" stroke="#666" fill="#CCC" stroke-width="2"/>
+    <polygon points="2 2, 48 2, 38 48, 12 48" stroke="#666" fill="#CCC" stroke-width="2"/>
+    <polygon points="4 4, 46 4, 36 46, 14 46" fill="#D89F39"/>
     
 </svg>
