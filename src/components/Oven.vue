@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div class="component-root">
         <img class="svg-oven" src="../assets/oven.svg"/>
-        <p>{{title}}</p>
     </div>
 </template>
 

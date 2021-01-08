@@ -1,13 +1,12 @@
 <template>
-    <div>
+    <div class="component-root">
         <img class="svg-motor" src="../assets/motor.svg"/>
-        <p>{{title}}</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Motor',
+    name: 'ConveyorMotor',
     props: {
         title: String
     }

@@ -1,13 +1,12 @@
 <template>
-    <div>
+    <div class="component-root">
         <img class="svg-common" src="../assets/switch.svg"/>
-        <p>{{title}}</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'MachineSwitch',
+    name: 'ConveyorSwitch',
     props: {
         title: String
     }

@@ -1,21 +1,24 @@
 <template>
-    <div>
+    <div class="component-root">
         <img class="svg-conveyor" src="../assets/conveyor.svg"/>
-        <p>{{title}}</p>
-
-        <Motor title="Motor"/>
+        <div class="conveyor-controls">
+            <ConveyorMotor />
+            <ConveyorSwitch />
+        </div>
     </div>
 </template>
 
 <script>
-import Motor from './Motor'
+import ConveyorMotor from './Motor'
+import ConveyorSwitch from './Switch'
 export default {
     name: 'Conveyor',
     props: {
         title: String
     },
     components: {
-        Motor
+        ConveyorMotor,
+        ConveyorSwitch
     }
 }
 </script>
@@ -24,6 +27,12 @@ export default {
     .svg-conveyor {
         display: inline-block;
         width: 500px;
-        height: 10px;
+        height: 8px;
+    }
+
+    .conveyor-controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
     }
 </style>

@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div class="component-root">
         <img class="svg-common" src="../assets/stamper.svg"/>
-        <p>{{title}}</p>
     </div>
 </template>
 

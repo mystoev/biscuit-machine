@@ -1,20 +1,17 @@
 <template>
-    <div>
-        <MachineSwitch title="Switch"/>
-        <Extruder title="Extruder"/>
-        <Stamper title="Stamper"/>
-        <Oven title="Oven"/>
-        <Conveyor title="Conveyor"/>
+    <div class="machine-root">
+        <Extruder />
+        <Stamper />
+        <Oven />
+        <Conveyor />
     </div>
 </template>
 
 <script>
 import Conveyor from './Conveyor'
-import MachineSwitch from './Switch'
 import Extruder from './Extruder'
 import Stamper from './Stamper'
 import Oven from './Oven'
-
 
 export default {
     name: 'BiscuitMachine',
@@ -23,7 +20,6 @@ export default {
     },
     components: {
         Conveyor,
-        MachineSwitch,
         Extruder,
         Stamper,
         Oven
@@ -32,6 +28,13 @@ export default {
 </script>
 
 <style>
+    .machine-root {
+        margin: auto;
+        width: 500px;
+        padding: 20px;
+        font-size: 0px;
+    }
+
     .svg-common {
         display: inline-block;
         width: 100px;
