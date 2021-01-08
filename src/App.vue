@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <BiscuitMachine />
+    <Requirements />
   </div>
 </template>
 
 <script>
 import BiscuitMachine from './components/BiscuitMachine'
+import Requirements from './components/Requirements'
 
 export default {
   name: 'App',
   components: {
-    BiscuitMachine
+    BiscuitMachine,
+    Requirements
   }
 }
 </script>

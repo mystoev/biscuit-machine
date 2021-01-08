@@ -1,8 +1,10 @@
 <template>
     <div class="machine-root">
-        <Extruder />
-        <Stamper />
-        <Oven />
+        <div class="conveyor-top">
+            <Extruder />
+            <Stamper />
+            <Oven class="oven-position"/>
+        </div>
         <Conveyor />
     </div>
 </template>
@@ -30,9 +32,18 @@ export default {
 <style>
     .machine-root {
         margin: auto;
-        width: 500px;
+        width: 700px;
         padding: 20px;
         font-size: 0px;
+    }
+
+    .conveyor-top {
+        display: flex;
+        align-items: baseline;
+    }
+
+    .oven-position {
+        margin-left: 100px;
     }
 
     .svg-common {
