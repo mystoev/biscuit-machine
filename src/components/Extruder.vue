@@ -14,8 +14,10 @@
 <script>
 export default {
     name: 'Extruder',
-    props: {
-        title: String
+    methods: {
+        pulse: function() {
+            console.log("extruder pulse");
+        }
     }
 }
 </script>

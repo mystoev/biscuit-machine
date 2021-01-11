@@ -5,7 +5,10 @@
             <Stamper />
             <Oven class="oven-position"/>
         </div>
-        <Conveyor />
+        <Conveyor v-bind:motorFrequency="2500" 
+            v-on:conveyorStarted="start" 
+            v-on:conveyorStopped="stop" 
+            v-on:motorRotated="motorRotated" />
     </div>
 </template>
 
@@ -17,14 +20,27 @@ import Oven from './Oven'
 
 export default {
     name: 'BiscuitMachine',
-    props: {
-        title: String
+    data: function() {
+        return {
+            biscuits: []
+        }
     },
     components: {
         Conveyor,
         Extruder,
         Stamper,
         Oven
+    },
+    methods: {
+        start: function() {
+            Oven.methods.on();
+        },
+        stop: function() {
+            console.log("machine stopped");
+        },
+        motorRotated: function() {
+            console.log("machine got that the motor rotated");
+        }
     }
 }
 </script>

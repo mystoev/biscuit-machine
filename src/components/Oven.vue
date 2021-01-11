@@ -13,8 +13,13 @@
 <script>
 export default {
     name: 'Oven',
-    props: {
-        title: String
+    methods: {
+        on: function() {
+            console.log("oven on");
+        },
+        off: function() {
+            console.log("oven off");
+        }
     }
 }
 </script>

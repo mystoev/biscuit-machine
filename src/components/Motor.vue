@@ -11,8 +11,26 @@
 <script>
 export default {
     name: 'ConveyorMotor',
+    data: function() {
+        return {
+            interval: null
+        }
+    },
     props: {
-        title: String
+        rotationFrequency: Number
+    },
+    methods: {
+        on: function(parent, frequency) {
+            console.log("motor on");
+
+            this.interval = setInterval(function() {
+                parent.motorRotated();
+            }, frequency);
+        },
+        off: function() {
+            console.log("motor off");
+            clearInterval(this.interval);
+        }
     }
 }
 </script>

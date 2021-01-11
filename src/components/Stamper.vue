@@ -16,8 +16,10 @@
 <script>
 export default {
     name: 'Stamper',
-    props: {
-        title: String
+    methods: {
+        pulse: function() {
+            console.log("stamper pulse");
+        }
     }
 }
 </script>
