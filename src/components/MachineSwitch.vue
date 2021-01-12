@@ -20,7 +20,7 @@
 
 <script>
 export default {
-    name: 'ConveyorSwitch',
+    name: 'MachineSwitch',
     data: function() {
         return {
             state: "off"
@@ -36,7 +36,7 @@ export default {
             }
 
             this.state = newState;
-            this.$emit("switched", this.state);
+            window.eventHub.$emit("switch-changed", this.state);
         }
     }
 }

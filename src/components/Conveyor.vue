@@ -5,47 +5,32 @@
             
             <rect x="1" y="1" width="599px" height="6" stroke="#666" fill="#999" stroke-width="2"/>
 
-            <polygon points="621 31, 621 69, 699 69, 699 31, 694 31, 694 64, 626 64, 626 31" stroke="#666" fill="#CCC" stroke-width="2"/>
+            <polygon points="601 31, 601 69, 699 69, 699 31, 694 31, 694 64, 606 64, 606 31" stroke="#666" fill="#CCC" stroke-width="2"/>
+
         </svg>
-        <div class="conveyor-controls">
-            <ConveyorMotor v-on:rotated="motorRotated" />
-            <ConveyorSwitch v-on:switched="switchHandler" />
-        </div>
     </div>
 </template>
 
 <script>
-import ConveyorMotor from './Motor'
-import ConveyorSwitch from './Switch'
 export default {
     name: 'Conveyor',
-    data: function() {
-        return {
-            
-        }
-    },
     created: function() {
-        console.log("Conveyor created");
+        window.eventHub.$on("move-biscuits", this.moveBiscuits);
     },
     props: {
-        motorFrequency: Number
-    },
-    components: {
-        ConveyorMotor,
-        ConveyorSwitch
+        positions: Number
     },
     methods: {
-        switchHandler: function(evt) {
-            if (evt == "on") {
-                ConveyorMotor.methods.on(this, this.motorFrequency);
-                this.$emit("conveyorStarted");
-            } else {
-                ConveyorMotor.methods.off();
-                this.$emit("conveyorStopped");
-            }
-        },
-        motorRotated: function() {
-            this.$emit("motorRotated");
+        moveBiscuits: function(biscuits) {
+            biscuits.forEach(b => {
+                if (b.position < this.positions) {
+                    b.position += 1;
+                }
+
+                if (b.position == this.positions - 1) {
+                    window.eventHub.$emit("biscuit-done");
+                }
+            });
         }
     }
 }
@@ -56,11 +41,5 @@ export default {
         display: inline-block;
         width: 700px;
         height: 70px;
-    }
-
-    .conveyor-controls {
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-around;
     }
 </style>

@@ -10,26 +10,28 @@
 
 <script>
 export default {
-    name: 'ConveyorMotor',
+    name: 'Motor',
     data: function() {
         return {
-            interval: null
+            intervalHook: new Function()
         }
     },
-    props: {
-        rotationFrequency: Number
+    created: function() {
+        window.eventHub.$on("motor-start", this.on);
+        window.eventHub.$on("motor-stop", this.off);
     },
     methods: {
-        on: function(parent, frequency) {
+        on: function(frequency) {
             console.log("motor on");
 
-            this.interval = setInterval(function() {
-                parent.motorRotated();
-            }, frequency);
+            this.intervalHook = setInterval(function() {
+                window.eventHub.$emit("motor-pulse");
+            }, 1000 / frequency);
         },
         off: function() {
             console.log("motor off");
-            clearInterval(this.interval);
+
+            clearInterval(this.intervalHook);
         }
     }
 }
