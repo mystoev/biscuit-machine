@@ -4,7 +4,7 @@
             viewBox="0 0 100 100" xml:space="preserve">
 
             <ellipse  fill="#D89F39" stroke-width="2" stroke="#666" cx="50" cy="45" rx="7" ry="10" >
-                <animate id="extrudeBiscuitAnimation"
+                <!-- <animate id="extrudeBiscuitAnimation"
                         begin="indefnite"
                         attributeName="cy"
                         dur="1s"
@@ -24,7 +24,7 @@
                         dur="1s"
                         values="10; 7;"
                         repeatCount="1"
-                        />
+                        /> -->
             </ellipse>
 
             <polygon points="26 1, 74 1, 57 58, 44 58" stroke="#666" fill="#CCC" stroke-width="2"/>
@@ -43,20 +43,21 @@ export default {
         window.eventHub.$on("extruder-pulse", this.pulse);
     },
     methods: {
-        pulse: function() {
-            var animationElement = document.getElementById("extrudeBiscuitAnimation");
-            var animationElement2 = document.getElementById("extrudeBiscuitAnimation2");
-            var animationElement3 = document.getElementById("extrudeBiscuitAnimation3");
+        pulse: function(biscuits) {
+            biscuits.push({ id: Math.random(), state: "raw", position: 0 });
+            // var animationElement = document.getElementById("extrudeBiscuitAnimation");
+            // var animationElement2 = document.getElementById("extrudeBiscuitAnimation2");
+            // var animationElement3 = document.getElementById("extrudeBiscuitAnimation3");
             
-            animationElement.beginElement();
-            animationElement2.beginElement();
-            animationElement3.beginElement();
+            // animationElement.beginElement();
+            // animationElement2.beginElement();
+            // animationElement3.beginElement();
 
-            animationElement.removeEventListener("endEvent", this.pulsed)
-            animationElement.addEventListener("endEvent", this.pulsed);
+            // animationElement.removeEventListener("endEvent", this.pulsed)
+            // animationElement.addEventListener("endEvent", this.pulsed);
         },
         pulsed: function() {
-            window.eventHub.$emit("extruder-pulsed");
+            // window.eventHub.$emit("extruder-pulsed");
         }
     }
 }

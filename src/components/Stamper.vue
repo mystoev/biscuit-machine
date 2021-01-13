@@ -36,7 +36,11 @@ export default {
         window.eventHub.$on("stamper-pulse", this.pulse);
     },
     methods: {
-        pulse: function() {
+        pulse: function(biscuits) {
+            if(biscuits == null || biscuits.length == 0) {
+                return;
+            }
+
             var animationElement1 = document.getElementById("stamperAnimationElement1");
             var animationElement2 = document.getElementById("stamperAnimationElement2");
 

@@ -39,7 +39,10 @@ export default {
         window.eventHub.$on("oven-ready", this.ovenReady);
         window.eventHub.$on("motor-pulse", this.motorPulse);
         window.eventHub.$on("biscuit-done", this.biscuitDone);
-        window.eventHub.$on("extruder-pulsed", this.extruderPulsed);
+        window.eventHub.$on("oven-start", () => { this.isOvenStopped = false; });
+        window.eventHub.$on("oven-stop", () => { this.isOvenStopped = true; });
+
+        this.biscuits.push({ id: Math.random(), state: "raw", position: 0 });
     },
     data: function() {
         return {
@@ -47,7 +50,8 @@ export default {
             motorFrequency: 1,
             biscuits: [],
             isStopped: false,
-            isMotorRunning: false
+            isPaused: false,
+            isOvenStopped: true
         }
     },
     components: {
@@ -60,56 +64,72 @@ export default {
         MachineSwitch
     },
     methods: {
+        startMachine: function() {
+            if (this.isStopped) {
+                this.isStopped = false;
+
+                if (this.isOvenStopped) {
+                    window.eventHub.$emit("oven-start");
+                }
+                
+                return;
+            }
+
+            if (this.isPaused) {
+                this.isPaused = false;
+                window.eventHub.$emit("motor-start", this.motorFrequency);
+                return;
+            }
+
+            this.isStopped = false;
+            window.eventHub.$emit("oven-start");
+        },
+        pauseMachine: function() {
+            this.isPaused = true;
+            this.isStopped = false;
+            window.eventHub.$emit("motor-stop");
+        },
+        stopMachine: function() {
+            if (this.isPaused) {
+                this.isPaused = false;
+                window.eventHub.$emit("motor-start", this.motorFrequency);
+            }
+            
+            this.isStopped = true;
+        },
         switchChanged: function(evt) {
             if (evt == "on") {
-                this.isStopped = false;
-                window.eventHub.$emit("oven-start");
+                this.startMachine();
                 return;
             }
 
             if (evt == "pause") {
-                window.eventHub.$emit("motor-stop");
+                this.pauseMachine();
                 return;
             }
 
             if (evt == "off") {
-                this.isStopped = true;
-                //don't do this - see last requirement
-                // window.eventHub.$emit("motor-stop");
-                window.eventHub.$emit("oven-stop", true);
+                this.stopMachine();
                 return;
             }
         },
         ovenReady: function() {
             window.eventHub.$emit("motor-start", this.motorFrequency);
-
-            window.eventHub.$emit("extruder-pulse", this.biscuits);
-            this.biscuits.push({ id: Math.random(), state: "raw", position: 1 });
-        },
-        extruderPulsed: function() {
-            // try to refactor this - does not look good
-            if (!this.isStopped) {
-                this.biscuits.push({ id: Math.random(), state: "raw", position: 1 });
-            }
         },
         motorPulse: function() {
-            //biscuits do not move propperly, when switched off, and then turned on, while the leftovers are still there
-            
             window.eventHub.$emit("move-biscuits", this.biscuits);
-            if(this.biscuits.filter(b => b.position == 2).length > 0) {
-                window.eventHub.$emit("stamper-pulse");
-            }
+            
 
-            if (this.isStopped) {
+            if (!this.isStopped) {
+                window.eventHub.$emit("extruder-pulse", this.biscuits);
+            } else {
                 if(this.biscuits.length == this.biscuits.filter(b => b.position == 8).length) {
                     window.eventHub.$emit("motor-stop");
+                    window.eventHub.$emit("oven-stop", true);
                 }
-
-                return;
             }
-            
-            window.eventHub.$emit("extruder-pulse", this.biscuits);
-            
+
+            window.eventHub.$emit("stamper-pulse", this.biscuits.filter(b => b.position == 2));
         },
         biscuitDone: function() {
             this.biscuitsDone++;
@@ -145,6 +165,11 @@ export default {
     .biscuits-container {
         position:absolute; 
         top: 106px;
+    }
+
+    .biscuit-position-0 {
+        left: 0px;
+        top: -50px;
     }
 
     .biscuit-position-1 {
@@ -189,23 +214,4 @@ export default {
         justify-content: space-around;
     }
     
-    .initial-biscuit {
-        opacity: 1;
-        animation-name: fadeInOpacity;
-        animation-iteration-count: 1;
-        animation-timing-function: ease-in;
-        animation-duration: 1s;
-    }
-
-    @keyframes fadeInOpacity {
-        0% {
-            opacity: 0;
-        }
-        95% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
 </style>

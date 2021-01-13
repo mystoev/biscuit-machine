@@ -35,10 +35,6 @@ export default {
                 return;
             }
 
-            if (newState == "pause" && this.state == "off") {
-                return;
-            }
-
             this.state = newState;
             window.eventHub.$emit("switch-changed", this.state);
         }
