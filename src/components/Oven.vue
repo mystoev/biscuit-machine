@@ -70,7 +70,6 @@ export default {
             var that = this;
             if (isManual) {
                 that.ovenReadyEmitted = false;
-                console.log("it's Manual");
                 clearInterval(this.coolDownHook);
                 clearInterval(this.warmUpHook);
                 

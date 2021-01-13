@@ -14,13 +14,27 @@
 <script>
 export default {
     name: 'Conveyor',
+    data: function() {
+        return {
+            biscuitStates: {
+                3: "formed",
+                4: "enteredOven",
+                5: "cooking",
+                6: "done"
+            }
+        }
+    },
     created: function() {
-        window.eventHub.$on("move-biscuits", this.moveBiscuits);
+        window.eventHub.$on("move-biscuits", this.processBiscuits);
     },
     props: {
         positions: Number
     },
     methods: {
+        processBiscuits: function(biscuits) {
+            this.moveBiscuits(biscuits);
+            this.changeBiscuitsState(biscuits);
+        },
         moveBiscuits: function(biscuits) {
             biscuits.forEach(b => {
                 if (b.position < this.positions) {
@@ -31,6 +45,11 @@ export default {
                     window.eventHub.$emit("biscuit-done");
                 }
             });
+        },
+        changeBiscuitsState: function(biscuits) {
+            biscuits
+                .filter(b => this.biscuitStates[b.position])
+                .forEach(b => b.state = this.biscuitStates[b.position]);
         }
     }
 }

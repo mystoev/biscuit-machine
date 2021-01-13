@@ -8,7 +8,7 @@
 
         <div class="biscuits-container">
             <Biscuit v-for="item of biscuits" :key="item.id" 
-                v-bind:class="'biscuit-position-' + item.position"
+                v-bind:class="'initial-biscuit biscuit-position-' + item.position"
                 v-bind:state="item.state" 
                 />
         </div>
@@ -39,13 +39,15 @@ export default {
         window.eventHub.$on("oven-ready", this.ovenReady);
         window.eventHub.$on("motor-pulse", this.motorPulse);
         window.eventHub.$on("biscuit-done", this.biscuitDone);
+        window.eventHub.$on("extruder-pulsed", this.extruderPulsed);
     },
     data: function() {
         return {
             biscuitsDone: 0,
             motorFrequency: 1,
             biscuits: [],
-            isStopped: false
+            isStopped: false,
+            isMotorRunning: false
         }
     },
     components: {
@@ -80,58 +82,34 @@ export default {
         },
         ovenReady: function() {
             window.eventHub.$emit("motor-start", this.motorFrequency);
+
+            window.eventHub.$emit("extruder-pulse", this.biscuits);
+            this.biscuits.push({ id: Math.random(), state: "raw", position: 1 });
+        },
+        extruderPulsed: function() {
+            // try to refactor this - does not look good
+            if (!this.isStopped) {
+                this.biscuits.push({ id: Math.random(), state: "raw", position: 1 });
+            }
         },
         motorPulse: function() {
+            //biscuits do not move propperly, when switched off, and then turned on, while the leftovers are still there
+            
+            window.eventHub.$emit("move-biscuits", this.biscuits);
+            if(this.biscuits.filter(b => b.position == 2).length > 0) {
+                window.eventHub.$emit("stamper-pulse");
+            }
 
             if (this.isStopped) {
-                window.eventHub.$emit("move-biscuits", this.biscuits);
-
-                this.biscuits.forEach(b => {
-                    if (b.position == 2) {
-                        b.state = "formed";
-                    }
-
-                    if (b.position == 4) {
-                        b.state = "cooking";
-                    }
-
-                    if (b.position == 6) {
-                        b.state = "done";
-                    }
-                });
-
                 if(this.biscuits.length == this.biscuits.filter(b => b.position == 8).length) {
                     window.eventHub.$emit("motor-stop");
                 }
 
                 return;
             }
-
-            if (this.biscuits.length == 0) {
-                window.eventHub.$emit("extruder-pulse", this.biscuits);
-                return;
-            }
             
-            window.eventHub.$emit("move-biscuits", this.biscuits);
             window.eventHub.$emit("extruder-pulse", this.biscuits);
-
-            this.biscuits.forEach(b => {
-                if (b.position == 2) {
-                    b.state = "formed";
-                }
-
-                if (b.position == 4) {
-                    b.state = "enteredOven";
-                }
-
-                if (b.position == 5) {
-                    b.state = "cooking";
-                }
-
-                if (b.position == 6) {
-                    b.state = "done";
-                }
-            });
+            
         },
         biscuitDone: function() {
             this.biscuitsDone++;
@@ -166,11 +144,7 @@ export default {
 
     .biscuits-container {
         position:absolute; 
-        top: 110px;
-    }
-
-    .biscuit-position-0 {
-
+        top: 106px;
     }
 
     .biscuit-position-1 {
@@ -214,21 +188,24 @@ export default {
         display: flex;
         justify-content: space-around;
     }
-
-    /* .fade-in {
+    
+    .initial-biscuit {
         opacity: 1;
         animation-name: fadeInOpacity;
         animation-iteration-count: 1;
         animation-timing-function: ease-in;
-        animation-duration: 0.5s;
+        animation-duration: 1s;
     }
 
     @keyframes fadeInOpacity {
         0% {
             opacity: 0;
         }
+        95% {
+            opacity: 0;
+        }
         100% {
             opacity: 1;
         }
-    } */
+    }
 </style>

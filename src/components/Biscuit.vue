@@ -1,17 +1,22 @@
 <template>
     <div class="biscuit">
         <svg class="svg-cookie" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 100 12" xml:space="preserve">
-            <ellipse v-if="state == 'raw'" cx="50" cy="6" rx="5" ry="5" stroke-width="2" stroke="#666"
-                v-bind:fill="'#D89F39'" />
-            <ellipse v-else-if="state == 'formed'" cx="50" cy="6" rx="20" ry="5" stroke-width="2" stroke="#666"
-                v-bind:fill="'#D89F39'" />
-            <ellipse v-else-if="state == 'enteredOven'" cx="50" cy="6" rx="20" ry="5" stroke-width="2" stroke="#666"
-                v-bind:fill="'#C78021'" />
-            <ellipse v-else-if="state == 'cooking'" cx="50" cy="6" rx="20" ry="5" stroke-width="2" stroke="#666"
-                v-bind:fill="'#B9670C'" />
-            <ellipse v-else-if="state == 'done'" cx="50" cy="6" rx="20" ry="5" stroke-width="2" stroke="#666"
-                v-bind:fill="'#B45F06'" />
+            viewBox="0 0 100 16" xml:space="preserve">
+            
+            <ellipse v-if="state == 'raw'" fill="#D89F39" stroke-width="2" stroke="#666"
+                 cx="50" cy="8" rx="10" ry="7" />
+
+            <ellipse v-else-if="state == 'formed'" fill="#D89F39" stroke-width="2" stroke="#666"
+                 cx="50" cy="10" rx="20" ry="5" />
+
+            <ellipse v-else-if="state == 'enteredOven'" fill="#C78021" stroke-width="2" stroke="#666"
+                 cx="50" cy="10" rx="20" ry="5" />
+
+            <ellipse v-else-if="state == 'cooking'" fill="#B9670C" stroke-width="2" stroke="#666"
+                 cx="50" cy="10" rx="20" ry="5" />
+
+            <ellipse v-else-if="state == 'done'" fill="#B45F06" stroke-width="2" stroke="#666"
+                cx="50" cy="10" rx="20" ry="5" />
         </svg>
     </div>
 </template>
@@ -21,9 +26,6 @@ export default {
     name: 'Biscuit',
     props: {
         state: String
-    },
-    methods: {
-        
     }
 }
 </script>
@@ -33,16 +35,16 @@ export default {
        position: absolute;
        display: inline-block;
        width: 100px;
-       transition: all 1s;
+       transition: all 1s linear;
    }
 
    .svg-cookie {
        display: block;
-       height: 12px;
+       height: 16px;
        width: 100px;
    }
 
    ellipse {
-       transition: fill 1s ease;
+       transition: fill 1s;
    }
 </style>
