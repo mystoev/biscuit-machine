@@ -49,6 +49,7 @@ export default {
         },
         changeBiscuitsState: function(biscuits) {
             biscuits
+                .filter(b => b.state != "burned")
                 .filter(b => this.biscuitStates[b.position])
                 .forEach(b => b.state = this.biscuitStates[b.position]);
         },

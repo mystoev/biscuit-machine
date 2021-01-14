@@ -20,6 +20,9 @@
 
             <ellipse v-else-if="state == 'done'" fill="#B45F06" class="stroke"
                 cx="50" cy="10" rx="20" ry="5" />
+
+            <ellipse v-else-if="state == 'burned'" fill="#666" class="stroke"
+                cx="50" cy="10" rx="20" ry="5" />
         </svg>
     </div>
 </template>
