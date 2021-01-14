@@ -9,8 +9,4 @@ new Vue({
 }).$mount('#app')
 
 
-//Hide initial biscuit
 //Shown burnt biscuits, when paused
-//Improve switch visual style - curve the top edges
-//Improve switch functionality - be able to pull leaver; highlight the state
-//Turn the oven initial temp back to 20 

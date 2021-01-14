@@ -19,14 +19,16 @@ export default {
 </script>
 
 <style>
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
-}
+  #app {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      margin-top: 60px;
+  }
 
-.component-root {
-  display: inline-block;
-}
+  .svg-common {
+      width: 100px;
+      height: 100px;
+  }
 </style>

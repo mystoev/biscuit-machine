@@ -1,11 +1,10 @@
 <template>
     <div class="component-root">
-        <svg class="svg-conveyor" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-            viewBox="0 0 700 70" xml:space="preserve">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+            class="svg-conveyor" viewBox="0 0 700 70">
             
-            <rect x="1" y="1" width="599px" height="6" stroke="#666" fill="#999" stroke-width="2"/>
-
-            <polygon points="601 31, 601 69, 699 69, 699 31, 694 31, 694 64, 606 64, 606 31" stroke="#666" fill="#CCC" stroke-width="2"/>
+            <rect class="conveyor-line" x="1" y="1" />
+            <polygon class="conveyor-tray" points="601 31, 601 69, 699 69, 699 31, 694 31, 694 64, 606 64, 606 31"/>
 
         </svg>
     </div>
@@ -17,6 +16,7 @@ export default {
     data: function() {
         return {
             biscuitStates: {
+                2: "stamped",
                 3: "formed",
                 4: "enteredOven",
                 5: "cooking",
@@ -25,7 +25,7 @@ export default {
         }
     },
     created: function() {
-        window.eventHub.$on("move-biscuits", this.processBiscuits);
+        window.eventHub.$on("process-biscuits", this.processBiscuits);
     },
     props: {
         positions: Number
@@ -60,5 +60,19 @@ export default {
         display: inline-block;
         width: 700px;
         height: 70px;
+    }
+
+    .conveyor-line {
+        width: 599px;
+        height: 6px;
+        stroke-width: 2px;
+        stroke: #666;
+        fill: #999; 
+    }
+
+    .conveyor-tray {
+        stroke-width: 2px;
+        stroke: #666;
+        fill: #CCC;
     }
 </style>

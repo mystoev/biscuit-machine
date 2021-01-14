@@ -1,8 +1,8 @@
 <template>
     <div class="component-root">
-        <svg class="svg-motor" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 80 80" xml:space="preserve">
-            <circle cx="35" cy="35" r="30" stroke="#666" fill="#6D9EEB" stroke-width="2" stroke-dasharray="16 4">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+            class="svg-motor" viewBox="0 0 80 80">
+            <circle class="motorRotor" cx="35" cy="35" r="30">
                 <animateTransform id="motorRotator"
                     begin="indefnite"
                     attributeName="transform" 
@@ -13,7 +13,7 @@
                     to="360 35 35" 
                     repeatCount="indefinite" />
             </circle>
-            <circle cx="35" cy="35" r="14" stroke="#666" fill="#A4C2F4" stroke-width="2" stroke-dasharray="5 2"/>
+            <circle class="motorStator" cx="35" cy="35" r="14" />
         </svg>
     </div>
 </template>
@@ -23,7 +23,8 @@ export default {
     name: 'Motor',
     data: function() {
         return {
-            intervalHook: new Function()
+            intervalHook: new Function(),
+            state: "off"
         }
     },
     created: function() {
@@ -31,16 +32,25 @@ export default {
         window.eventHub.$on("motor-stop", this.off);
     },
     methods: {
-        on: function(frequency) {
+        on: function() {
+            if (this.state == "on") {
+                return;
+            }
+
+            this.state = "on";
             document.getElementById("motorRotator").beginElement();
 
             this.intervalHook = setInterval(function() {
                 window.eventHub.$emit("motor-pulse");
-            }, 1000 / frequency);
+            }, 1000);
         },
         off: function() {
-            document.getElementById("motorRotator").endElement();
+            if (this.state == "off") {
+                return;
+            }
 
+            this.state = "off";
+            document.getElementById("motorRotator").endElement();
             clearInterval(this.intervalHook);
         }
     }
@@ -52,5 +62,19 @@ export default {
         display: inline-block;
         width: 80px;
         height: 80px;
+    }
+
+    .motorRotor {
+        stroke-width: 2px;
+        stroke-dasharray: 16 4;
+        stroke: #666;
+        fill: #6D9EEB;
+    }
+
+    .motorStator {
+        stroke-width: 2px; 
+        stroke-dasharray: 5 2;
+        stroke: #666;
+        fill: #A4C2F4;
     }
 </style>

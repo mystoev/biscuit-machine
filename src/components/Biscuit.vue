@@ -1,21 +1,24 @@
 <template>
     <div class="biscuit">
-        <svg class="svg-cookie" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 100 16" xml:space="preserve">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+            class="svg-cookie" viewBox="0 0 100 16">
             
-            <ellipse v-if="state == 'raw'" fill="#D89F39" stroke-width="2" stroke="#666"
+            <ellipse v-if="state == 'raw'" fill="#D89F39" 
                  cx="50" cy="8" rx="10" ry="7" />
-
-            <ellipse v-else-if="state == 'formed'" fill="#D89F39" stroke-width="2" stroke="#666"
+            
+            <ellipse v-else-if="state == 'stamped'" fill="#D89F39" class="biscuit-stamped" 
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'enteredOven'" fill="#C78021" stroke-width="2" stroke="#666"
+            <ellipse v-else-if="state == 'formed'" fill="#D89F39"
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'cooking'" fill="#B9670C" stroke-width="2" stroke="#666"
+            <ellipse v-else-if="state == 'enteredOven'" fill="#C78021"
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'done'" fill="#B45F06" stroke-width="2" stroke="#666"
+            <ellipse v-else-if="state == 'cooking'" fill="#B9670C"
+                 cx="50" cy="10" rx="20" ry="5" />
+
+            <ellipse v-else-if="state == 'done'" fill="#B45F06"
                 cx="50" cy="10" rx="20" ry="5" />
         </svg>
     </div>
@@ -44,7 +47,19 @@ export default {
        width: 100px;
    }
 
-   ellipse {
-       transition: fill 1s;
+   .svg-cookie ellipse {
+        transition: fill 1s;
+        stroke-width: 2px;
+        stroke: #666;
    }
+
+   .biscuit-stamped {
+       animation-name: example;
+       animation-duration: 1s;
+   }
+   @keyframes example {
+        0%   {cy: 8px;  rx: 10px; ry: 7px;}
+        95%  {cy: 8px;  rx: 10px; ry: 7px;}
+        100% {cy: 10px; rx: 20px; ry: 5px;}
+    }
 </style>
