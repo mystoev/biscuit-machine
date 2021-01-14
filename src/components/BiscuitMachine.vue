@@ -8,7 +8,7 @@
 
         <div class="biscuits-container">
             <Biscuit v-for="item of biscuits" :key="item.id" 
-                v-bind:class="'initial-biscuit biscuit-position-' + item.position"
+                v-bind:class="'biscuit-position-' + item.position"
                 v-bind:state="item.state" 
                 />
         </div>
@@ -48,7 +48,9 @@ export default {
         window.eventHub.$on("oven-start", () => { this.ovenState = "on"; });
         window.eventHub.$on("oven-not-ready", () => { this.ovenState = "off" });
         window.eventHub.$on("oven-ready", () => { this.ovenState = "ready"; });
-        window.eventHub.$on("biscuit-done", () => { this.biscuitsDone++; });
+        window.eventHub.$on("biscuit-done", () => { 
+            this.biscuitsDone++; 
+        });
 
         window.eventHub.$on("motor-pulse", this.motorPulse);
     },
@@ -137,56 +139,55 @@ export default {
     .biscuits-container {
         z-index: -1;
         position:absolute; 
-        top: 106px;
+        top: 0px;
     }
 
     .biscuit-position-0 {
         left: 0px;
-        top: -75px;
+        top: 36px;
     }
 
     .biscuit-position-1 {
         left: 0px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-2 {
         left: 100px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-3 {
         left: 200px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-4 {
         left: 300px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-5 {
         left: 400px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-6 {
         left: 500px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-7 {
         left: 600px;
-        top: -20px;
+        top: 86px;
     }
 
     .biscuit-position-8 {
         left: 600px;
-        top: 42px;
+        top: 150px;
     }
 
     .conveyor-controls {
-        margin-top: 20px;
         display: flex;
         justify-content: space-around;
     }

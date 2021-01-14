@@ -31,4 +31,13 @@ export default {
       width: 100px;
       height: 100px;
   }
+
+  .stroke {
+      stroke-width: 2px;
+      stroke: #666;
+  }
+
+  .fill {
+    fill: #CCC;
+  }
 </style>

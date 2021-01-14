@@ -3,8 +3,8 @@
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
             class="svg-conveyor" viewBox="0 0 700 70">
             
-            <rect class="conveyor-line" x="1" y="1" />
-            <polygon class="conveyor-tray" points="601 31, 601 69, 699 69, 699 31, 694 31, 694 64, 606 64, 606 31"/>
+            <rect class="conveyor-line stroke" x="1" y="1" />
+            <polygon class="stroke fill" points="601 31, 601 69, 699 69, 699 31, 694 31, 694 64, 606 64, 606 31"/>
 
         </svg>
     </div>
@@ -34,6 +34,7 @@ export default {
         processBiscuits: function(biscuits) {
             this.moveBiscuits(biscuits);
             this.changeBiscuitsState(biscuits);
+            this.removeOldBiscuits();
         },
         moveBiscuits: function(biscuits) {
             biscuits.forEach(b => {
@@ -50,6 +51,13 @@ export default {
             biscuits
                 .filter(b => this.biscuitStates[b.position])
                 .forEach(b => b.state = this.biscuitStates[b.position]);
+        },
+        removeOldBiscuits: function() {
+            var els = document.getElementsByClassName("biscuit");
+            if (els.length > 10) {
+                var parentNode = els[0].parentNode;
+                parentNode.removeChild(els[0]);
+            }
         }
     }
 }
@@ -65,14 +73,6 @@ export default {
     .conveyor-line {
         width: 599px;
         height: 6px;
-        stroke-width: 2px;
-        stroke: #666;
         fill: #999; 
-    }
-
-    .conveyor-tray {
-        stroke-width: 2px;
-        stroke: #666;
-        fill: #CCC;
     }
 </style>

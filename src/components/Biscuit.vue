@@ -3,22 +3,22 @@
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
             class="svg-cookie" viewBox="0 0 100 16">
             
-            <ellipse v-if="state == 'raw'" fill="#D89F39" 
-                 cx="50" cy="8" rx="10" ry="7" />
+            <ellipse v-if="state == 'raw'" fill="#D89F39" class="stroke"
+                 cx="50" cy="8" rx="7" ry="7" />
             
-            <ellipse v-else-if="state == 'stamped'" fill="#D89F39" class="biscuit-stamped" 
+            <ellipse v-else-if="state == 'stamped'" fill="#D89F39" class="stroke biscuit-stamped" 
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'formed'" fill="#D89F39"
+            <ellipse v-else-if="state == 'formed'" fill="#D89F39" class="stroke"
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'enteredOven'" fill="#C78021"
+            <ellipse v-else-if="state == 'enteredOven'" fill="#C78021" class="stroke"
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'cooking'" fill="#B9670C"
+            <ellipse v-else-if="state == 'cooking'" fill="#B9670C" class="stroke"
                  cx="50" cy="10" rx="20" ry="5" />
 
-            <ellipse v-else-if="state == 'done'" fill="#B45F06"
+            <ellipse v-else-if="state == 'done'" fill="#B45F06" class="stroke"
                 cx="50" cy="10" rx="20" ry="5" />
         </svg>
     </div>
@@ -49,8 +49,6 @@ export default {
 
    .svg-cookie ellipse {
         transition: fill 1s;
-        stroke-width: 2px;
-        stroke: #666;
    }
 
    .biscuit-stamped {
