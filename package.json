@@ -9,6 +9,7 @@
     "predeploy": "npm run build",
     "deploy": "npx gh-pages -d dist"
   },
+  "homepage": "https://mystoev.github.io/biscuit-machine",
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
