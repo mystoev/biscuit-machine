@@ -1,7 +1,12 @@
 # biscuit-machine
+My VueJS interpretation for the famous "Biscuit Machine" task
 
-## Initialize and run project
+## Browse
+https://mystoev.github.io/biscuit-machine/
+
+## Run locally
 ```
+nvm use
 npm install
 npm run serve
 ```
